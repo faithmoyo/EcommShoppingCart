@@ -83,10 +83,10 @@
                     }
                     if (calculatedTotal != null) {
 
-                        $("#tdDiscountAmount").text("$" + calculatedTotal.totalBulkBuyDiscount);
-                        $("#tdTotalAmountvalue").text("$" + calculatedTotal.totalAmount);
+                        $("#tdDiscountAmount").text("$" + calculatedTotal.totalBulkBuyDiscount.toFixed(2));
+                        $("#tdTotalAmountvalue").text("$" + calculatedTotal.totalAmount.toFixed(2));
 
-                        $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount);
+                        $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount.toFixed(2));
                         if (calculatedTotal.totalBulkBuyDiscount != null && calculatedTotal.totalBulkBuyDiscount > 0) {
                             $("#tr_discount").show();
                         }
@@ -274,10 +274,10 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
                 if (calculatedTotal != null) {
 
 
-                    $("#tdDiscountAmount").text("$" + calculatedTotal.totalBulkBuyDiscount);
-                    $("#tdTotalAmountvalue").text("$" + calculatedTotal.totalAmount);
+                    $("#tdDiscountAmount").text("$" + calculatedTotal.totalBulkBuyDiscount.toFixed(2));
+                    $("#tdTotalAmountvalue").text("$" + calculatedTotal.totalAmount.toFixed(2));
 
-                    $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount);
+                    $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount.toFixed(2));
                     if (calculatedTotal.totalBulkBuyDiscount != null && calculatedTotal.totalBulkBuyDiscount > 0) {
                         $("#tr_discount").show();
                     }

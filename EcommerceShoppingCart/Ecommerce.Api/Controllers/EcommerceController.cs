@@ -28,6 +28,7 @@ namespace Ecommerce.Api.Controllers
         {
             try
             {
+                var ecommManager = new EcommerceManager();
                 return Request.CreateResponse(HttpStatusCode.OK, ecommerce.GetProduct(product_id_list));
             }
             catch (Exception ex)
@@ -45,6 +46,7 @@ namespace Ecommerce.Api.Controllers
 
             try
             {
+                var ecommManager = new EcommerceManager();
                 return Request.CreateResponse(HttpStatusCode.OK, ecommerce.CountCartItems(cartItems));
             }
             catch (Exception ex)

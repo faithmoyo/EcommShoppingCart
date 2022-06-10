@@ -9,7 +9,7 @@ namespace Ecommerce.Repository
 {
     public class EcommerceRepository
     {
-        DataSourceEcommerce _DB;
+        public DataSourceEcommerce _DB;
 
         public IEnumerable<Product> GetProduct(string productId_list)
         {
@@ -25,13 +25,16 @@ namespace Ecommerce.Repository
 
         public DiscountType GetDiscountType(string discountVoucher)
         {
+            if (!string.IsNullOrEmpty(discountVoucher))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@@DISCOUNT_TYPE_CODE", discountVoucher);
 
-            var parameters = new DynamicParameters();
-            parameters.Add("@@DISCOUNT_TYPE_CODE", discountVoucher);
-
-            _DB = new DataSourceEcommerce();
-            var results = _DB.Connection().Query<DiscountType>("STP_GET_DISCOUNT_TYPE", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
-            return results;
+                _DB = new DataSourceEcommerce();
+                var results = _DB.Connection().Query<DiscountType>("STP_GET_DISCOUNT_TYPE", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                return results;
+            }
+            return new DiscountType();
         }
         public int CountCartItems(List<CartItem> cartItemsList)
         {

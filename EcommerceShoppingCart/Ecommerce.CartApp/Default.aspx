@@ -314,8 +314,8 @@
                        </tr>
 
                         <tr id="tr_discount" style="display:none">
-                        <th colspan="3" >DISCOUNT</th>                      
-                        <th id="tdDiscountAmount">0</th>                        
+                        <th colspan="3" style="color:red">DISCOUNT</th>                      
+                        <th id="tdDiscountAmount" style="color:red">0</th>                        
                        </tr>                       
                         <tr>
                             <th colspan="3">PAYABLE AMOUNT</th>                      
