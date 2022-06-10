@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Test Shop" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CartApp._Default" %>
+﻿<%@ Page Title="SeeFar - Binocular Store" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CartApp._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -17,7 +17,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Test Product</h5>
+                                    <h5 class="fw-bolder">Waterproof Outdoor Binocular Porro Telescope 20x50mm</h5>
                                     <!-- Product price-->
                                     $40.00
                                
@@ -38,7 +38,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Test Binocula</h5>
+                                    <h5 class="fw-bolder">Binoculars Aluminium Alloy 4 X 35 mm</h5>
                                     <!-- Product price-->
                                     $80.00
                                 </div>
@@ -58,7 +58,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Test Binocula</h5>
+                                    <h5 class="fw-bolder">Vortex 10x42 Diamondback HD Binoculars</h5>
                                     
                                     <!-- Product price-->
                                     $40.00
@@ -79,7 +79,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Night Vision</h5>
+                                    <h5 class="fw-bolder">Night Vision Binoculars</h5>
                                     <!-- Product price-->
                                      $280.00
                                 </div>
@@ -98,7 +98,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Roof Prism</h5>
+                                    <h5 class="fw-bolder">Roof Prism Spiral Binoculars</h5>
                                     
                                     <!-- Product price-->
                                     $40.00
@@ -138,7 +138,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Nikon Acullon</h5>
+                                    <h5 class="fw-bolder">Nikon Acullon Binoculars</h5>
                                     
                                     <!-- Product price-->
                                     $40.00
@@ -158,7 +158,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Bushnell Binocula</h5>
+                                    <h5 class="fw-bolder">Bushnell Binoculars</h5>
                                  
                                     <!-- Product price-->
                                     $40.00
@@ -189,7 +189,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Malkin Binocula 10x42</h5>
+                                    <h5 class="fw-bolder">Malkina Binoculars 10x42mm</h5>
                                
                                     <!-- Product price-->                                   
                                     $18.00
@@ -211,7 +211,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Malkin Binocula 10x25</h5>
+                                    <h5 class="fw-bolder">Malkina Binoculars 400px 10x25mm</h5>
                                     <!-- Product price-->
                                        $25.00
                                 </div>
@@ -232,7 +232,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Nikon Binocula</h5>
+                                    <h5 class="fw-bolder">Nikon Binoculars</h5>
                                     <!-- Product price-->
                                       $25.00
                                 </div>
@@ -251,7 +251,7 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Malkin Binocula</h5>                                    
+                                    <h5 class="fw-bolder">Malkina Binoculars 200px 10x42mm</h5>                                    
                                     <!-- Product price-->
                                     <span id="priceSpan" class="">$20.00</span>
                                     
@@ -286,7 +286,15 @@
         </button>
       </div>
       <div class="modal-body">
-                <table class="table table-striped table-bordered" style="width:100%" id ="tableCartDetails">
+          <div class="col-lg-12">
+			<div class="panel panel-default">
+                <div class="panel-heading" style="color: #333;background-color: #f5f5f5;border-color: #ddd;">
+                   <div style="clear:both"></div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                    	<div class="col-sm-12 table-responsive">
+                    		 <table class="table table-striped table-bordered" style="width:100%" id ="tableCartDetails">
                 <thead>
                     <tr>
                         <td style='display:none'></td>
@@ -305,22 +313,31 @@
                             <th id="tdTotalAmountvalue">0</th>                        
                        </tr>
 
-                      <tr id="trbulk_buy_discount" style="display:none">
-                        <th colspan="3" >BULK BUY (10% OFF)</th>                      
-                        <th id="tdBulkBuyDiscountAmount">0</th>                        
-                       </tr>
-                       <tr id="trlocal_buy_discount"  style="display:none">
-                        <th colspan="3" >LOCAL BUY (5% OFF)</th>                      
-                        <th id="tdLocalBuyDiscountAmount">0</th>                        
-                      </tr>
+                        <tr id="tr_discount" style="display:none">
+                        <th colspan="3" >DISCOUNT</th>                      
+                        <th id="tdDiscountAmount">0</th>                        
+                       </tr>                       
                         <tr>
                             <th colspan="3">PAYABLE AMOUNT</th>                      
                             <th id="tdTotalAfterDiscountvalue">0</th>                        
                        </tr>
+                        <tr></tr>
+                        <tr>
+                        <th colspan="2" ><input type="text" placeholder="ENTER VOUCHER" name="inputVoucher" id="inputVoucher" value="" class="form-control"/></th>                      
+                        <th colspan="2" style='text-align:right'> <button type="button" name="add" id="viewDicountVoucher"  class="btn btn-success btn-xs">SUBMIT COUPON</button></th>                        
+                      </tr>
                         
                     </tfoot>
   
             </table>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+               
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -331,7 +348,7 @@
 </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Test Binocula 2022</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; SeeFar Binocular Store 2022</p></div>
         </footer>
        
      

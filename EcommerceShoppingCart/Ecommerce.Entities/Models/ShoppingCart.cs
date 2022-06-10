@@ -2,10 +2,11 @@
 
 namespace Ecommerce.Entities.Models
 {
-    public class TestObject
+    public class ShoppingCart
     {
         public List<Product> productList { get; set; }
         public List<SalesOrderLine> salesOrderLines { get; set; }
+        public string discountVoucher { get; set; }
 
     }
 }

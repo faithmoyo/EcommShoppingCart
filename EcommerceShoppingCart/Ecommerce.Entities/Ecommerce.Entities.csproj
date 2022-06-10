@@ -45,13 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CalculatedTotal.cs" />
-    <Compile Include="Models\CartItems.cs" />
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\DiscountType.cs" />
     <Compile Include="Models\ICalculatedTotal.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Product_Type.cs" />
     <Compile Include="Models\SalesOrderLine.cs" />
-    <Compile Include="Models\TestObject.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

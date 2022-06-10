@@ -9,13 +9,14 @@ using System.Web.Http;
 
 namespace Ecommerce.Api.Controllers
 {
-    [System.Web.Http.RoutePrefix("api/v1/ecommerce_api")]
+
+    [RoutePrefix("api/v1/ecommerce_api")]
 
     public class EcommerceController : ApiController
     {
         EcommerceManager ecommerce = new EcommerceManager();
 
-        [System.Web.Http.Route("GetTest")]
+        [Route("GetTest")]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -31,7 +32,7 @@ namespace Ecommerce.Api.Controllers
             }
             catch (Exception ex)
             {
-                var message = string.Format("Error occured on returning approvals" + ex);
+                var message = string.Format("Error occured on returning products" + ex);
                 HttpError err = new HttpError(message);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, err);
             }
@@ -39,7 +40,7 @@ namespace Ecommerce.Api.Controllers
 
         [HttpPost]
         [Route("countCartItem")]
-        public HttpResponseMessage CountCartItem([FromBody] List<Ecommerce.Entities.Models.CartItems> cartItems)
+        public HttpResponseMessage CountCartItem([FromBody] List<CartItem> cartItems)
         {
 
             try
@@ -48,7 +49,7 @@ namespace Ecommerce.Api.Controllers
             }
             catch (Exception ex)
             {
-                var message = string.Format("Error occured on returning approvals" + ex);
+                var message = string.Format("Error occured on counting cart items" + ex);
                 HttpError err = new HttpError(message);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, err);
             }
@@ -57,23 +58,20 @@ namespace Ecommerce.Api.Controllers
 
         [HttpPost]
         [Route("calculateTotal")]
-        public HttpResponseMessage CalculateTotal([FromBody] TestObject testObject)
+        public HttpResponseMessage CalculateTotal([FromBody] ShoppingCart sessionShoppingCart)
         {
 
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, ecommerce.CalculateTotal(testObject));
+                return Request.CreateResponse(HttpStatusCode.OK, ecommerce.CalculateTotal(sessionShoppingCart));
             }
             catch (Exception ex)
             {
-                var message = string.Format("Error occured on returning approvals" + ex);
+                var message = string.Format("Error occured on calculating session shopping cart total" + ex);
                 HttpError err = new HttpError(message);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, err);
             }
 
         }
-
-      
-
     }
 }

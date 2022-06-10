@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ecommerce.Entities.Models
 {
@@ -16,7 +12,7 @@ namespace Ecommerce.Entities.Models
        public DateTime PRODUCT_DATE_EDIT;
        public string  PRODUCT_IMAGE;
        public int PRODUCT_TYPE_ID;
-       public Boolean LOCAL_PRODUCE;
+       public bool LOCAL_PRODUCE;
 
     }
 }

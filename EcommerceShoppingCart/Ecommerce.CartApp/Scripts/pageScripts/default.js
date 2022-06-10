@@ -4,46 +4,46 @@
     var addProductArray = [];
 
     $("#buttonViewCart").on('click', function () {
-        debugger;       
+        debugger;
 
         let product_id_list = product_id_array.join(",");//'1,2,3';
         let productArray = [];
         $.when(
 
-                $.ajax({
-                    type: 'GET',
-                    cache: true,
-                    url: "http://localhost/EcommerceApi/api/v1/ecommerce_api/getproducts?product_id_list=" + product_id_list,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        debugger;
-                        $("#tableCartDetails > tbody").html("");
-                        if (response != null && response != "") {
+            $.ajax({
+                type: 'GET',
+                cache: true,
+                url: "http://localhost/EcommerceApi/api/v1/ecommerce_api/getproducts?product_id_list=" + product_id_list,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    debugger;
+                    $("#tableCartDetails > tbody").html("");
+                    if (response != null && response != "") {
 
-                            if (typeof response === 'object')
-                                productArray = response;
-                            else if (typeof userData === 'string')
-                                productArray = JSON.parse(response);
-                   
-                        }
-
-                        if (productArray.length > 0) {
-
-                            productArray.forEach((entry) => {
-                                debugger;
-                                $("#tableCartDetails > tbody").append("<tr><td id='td_product_id' style='display:none'>" + entry.PRODUCT_ID + "</td><td id='td_cartdetail_desc' style='text-align:center'>" + entry.PRODUCT_DESCRIPTION + "</td><td style='text-align:center'> " + entry.PRODUCT_UNIT_PRICE + "</td><td style='text-align:center'><input type='number' id='txt_quantity'  value= 1 style='width: 100 %'></td><td><button  data-product_id_current=" + entry.PRODUCT_ID + " class='btn btn-danger' style='width: 100 %'>REMOVE</button></td></tr>");
-                            });
-                        }
-                        
-                        $("#btnModalShow").trigger("click");
-                    },
-                    error: function (data) {
-                        debugger;
-                        console.log(data.responseText);
+                        if (typeof response === 'object')
+                            productArray = response;
+                        else if (typeof userData === 'string')
+                            productArray = JSON.parse(response);
 
                     }
-                })
+
+                    if (productArray.length > 0) {
+
+                        productArray.forEach((entry) => {
+                            debugger;
+                            $("#tableCartDetails > tbody").append("<tr><td id='td_product_id' style='display:none'>" + entry.PRODUCT_ID + "</td><td id='td_cartdetail_desc' style='text-align:center'>" + entry.PRODUCT_DESCRIPTION + "</td><td style='text-align:center'> " + entry.PRODUCT_UNIT_PRICE + "</td><td style='text-align:center'><input type='number' id='txt_quantity'  value= 1 style='width: 100 %'></td><td><button  data-product_id_current=" + entry.PRODUCT_ID + " class='btn btn-danger' style='width: 100 %'>REMOVE</button></td></tr>");
+                        });
+                    }
+
+                    $("#btnModalShow").trigger("click");
+                },
+                error: function (data) {
+                    debugger;
+                    console.log(data.responseText);
+
+                }
+            })
         ).done(function (x) {
 
             let salesOrderLines = [];
@@ -58,9 +58,10 @@
             });
             debugger;
 
-            let TestObject = {
+            let ShoppingCart = {
                 'productList': productArray,
-                'salesOrderLines': salesOrderLines
+                'salesOrderLines': salesOrderLines,
+                'discountVoucher': $('#inputVoucher').val()
             }
             let calculatedTotal = {};
             $.ajax({
@@ -69,7 +70,7 @@
                 url: "http://localhost/EcommerceApi/api/v1/ecommerce_api/calculateTotal",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                data: JSON.stringify(TestObject),
+                data: JSON.stringify(ShoppingCart),
                 success: function (response) {
                     debugger;
                     if (response != null && response != "") {
@@ -80,21 +81,19 @@
                             calculatedTotal = JSON.parse(response);
                         debugger;
                     }
-                    if (calculatedTotal !=null) {
+                    if (calculatedTotal != null) {
 
-                        $("#tdBulkBuyDiscountAmount").text("$"+calculatedTotal.totalBulkBuyDiscount);
-                        $("#tdTotalAmountvalue").text("$" +calculatedTotal.totalAmount);
-                        $("#tdLocalBuyDiscountAmount").text("$" +calculatedTotal.totalLocalBuyDiscount);
-                        $("#tdTotalAfterDiscountvalue").text("$" +calculatedTotal.actualAmount);
-                        if (calculatedTotal.totalBulkBuyDiscount != null && calculatedTotal.totalBulkBuyDiscount >0) {
-                            $("#trbulk_buy_discount").show();
+                        $("#tdDiscountAmount").text("$" + calculatedTotal.totalBulkBuyDiscount);
+                        $("#tdTotalAmountvalue").text("$" + calculatedTotal.totalAmount);
+
+                        $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount);
+                        if (calculatedTotal.totalBulkBuyDiscount != null && calculatedTotal.totalBulkBuyDiscount > 0) {
+                            $("#tr_discount").show();
                         }
-                        if (calculatedTotal.totalLocalBuyDiscount != null && calculatedTotal.totalLocalBuyDiscount >0) {
-                            $("#trlocal_buy_discount").show();
-                        }
+
                     }
-                                     
-                     
+
+
                 },
                 error: function (data) {
                     debugger;
@@ -106,7 +105,7 @@
 
         });
 
-  
+
     });
 
     $('#discounted_stock').on('click', 'button', function () {
@@ -127,9 +126,9 @@
 
     $('#tableCartDetails').on('click', 'button', function () {
         debugger;
-        let product_id_current = Number($(this).attr('data-product_id_current'));        
+        let product_id_current = Number($(this).attr('data-product_id_current'));
         product_id_array = RemoveTableElement(product_id_array, product_id_current);
-        addProductArray = removeArrayElement(addProductArray,product_id_current)
+        addProductArray = removeArrayElement(addProductArray, product_id_current)
         reloadTableData(product_id_array, addProductArray);
         getCartCount(addProductArray);
     });
@@ -150,30 +149,32 @@
     });
 
     $('#tableCartDetails').on('input', 'input[type="number"]', function () {
-        let currentProductId = $(this).closest('tr').find('#td_product_id').text();
-        addProductArray = removeArrayElement(addProductArray, currentProductId);
+        let quantity = $(this).closest('tr').find('#txt_quantity').val();
+        if (quantity > 0) {
 
-        let product_object_added = {
-            'PRODUCT_ID': $(this).closest('tr').find('#td_product_id').text(),
-            'QUANTITY': $(this).closest('tr').find('#txt_quantity').val()
-        }       
-        addProductArray.push(product_object_added);
-        reloadTableData(product_id_array, addProductArray);
-        getCartCount(addProductArray);
+            let currentProductId = $(this).closest('tr').find('#td_product_id').text();
+            addProductArray = removeArrayElement(addProductArray, currentProductId);
 
-    })
-
+            let product_object_added = {
+                'PRODUCT_ID': $(this).closest('tr').find('#td_product_id').text(),
+                'QUANTITY': quantity
+            }
+            addProductArray.push(product_object_added);
+            reloadTableData(product_id_array, addProductArray);
+            getCartCount(addProductArray);
+        }
+    });
 
 });
 
-function RemoveTableElement (currentProductArray,productId) {
+function RemoveTableElement(currentProductArray, productId) {
     debugger;
-    let filtered_array = currentProductArray.filter(function (element) { return element!= productId; });
+    let filtered_array = currentProductArray.filter(function (element) { return element != productId; });
     debugger;
-    return filtered_array;    
+    return filtered_array;
 }
 
-function removeArrayElement(current_addProductArray,current_product_id) {
+function removeArrayElement(current_addProductArray, current_product_id) {
     let filtered_array = current_addProductArray.filter(function (element) { return element.PRODUCT_ID != current_product_id; });
     debugger;
     return filtered_array;
@@ -199,17 +200,17 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
                 if (response != null && response != "") {
 
                     if (typeof response === 'object')
-                        productArray = response// dont parse if its object already
+                        productArray = response// dont parse if object 
                     else if (typeof userData === 'string')
                         productArray = JSON.parse(response);
 
                 }
-                
+
                 if (productArray.length > 0) {
 
                     productArray.forEach((entry) => {
                         debugger;
-                        let salesOrderLineQuantity = 0; //currentAddedProductArray.find(element => element.PRODUCT_ID = entry.PRODUCT_ID);
+                        let salesOrderLineQuantity = 0;
 
                         currentAddedProductArray.forEach((x) => {
                             debugger;
@@ -219,11 +220,11 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
                             }
                         });
                         debugger;
-                        $("#tableCartDetails > tbody").append("<tr><td id='td_product_id' style='display:none'>" + entry.PRODUCT_ID + "</td><td id='td_cartdetail_desc' style='text-align:center'>" + entry.PRODUCT_DESCRIPTION + "</td><td style='text-align:center'> " + entry.PRODUCT_UNIT_PRICE + "</td><td style='text-align:center'><input type='number' id='txt_quantity'  value= " + salesOrderLineQuantity+" style='width: 100 %'></td><td><button  data-product_id_current=" + entry.PRODUCT_ID + " class='btn btn-danger' style='width: 100 %'>REMOVE</button></td></tr>");
+                        $("#tableCartDetails > tbody").append("<tr><td id='td_product_id' style='display:none'>" + entry.PRODUCT_ID + "</td><td id='td_cartdetail_desc' style='text-align:center'>" + entry.PRODUCT_DESCRIPTION + "</td><td style='text-align:center'> " + entry.PRODUCT_UNIT_PRICE + "</td><td style='text-align:center'><input type='number' id='txt_quantity'  value= " + salesOrderLineQuantity + " style='width: 100 %'></td><td><button  data-product_id_current=" + entry.PRODUCT_ID + " class='btn btn-danger' style='width: 100 %'>REMOVE</button></td></tr>");
                     });
                 }
 
-               
+
             },
             error: function (data) {
                 debugger;
@@ -249,7 +250,8 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
 
         let TestObject = {
             'productList': productArray,
-            'salesOrderLines': salesOrderLines
+            'salesOrderLines': salesOrderLines,
+            'discountVoucher': $('#inputVoucher').val()
         }
         let calculatedTotal = {};
         $.ajax({
@@ -271,17 +273,15 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
                 }
                 if (calculatedTotal != null) {
 
-                    
-                    $("#tdBulkBuyDiscountAmount").text("$" + calculatedTotal.totalBulkBuyDiscount);
+
+                    $("#tdDiscountAmount").text("$" + calculatedTotal.totalBulkBuyDiscount);
                     $("#tdTotalAmountvalue").text("$" + calculatedTotal.totalAmount);
-                    $("#tdLocalBuyDiscountAmount").text("$" + calculatedTotal.totalLocalBuyDiscount);
+
                     $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount);
                     if (calculatedTotal.totalBulkBuyDiscount != null && calculatedTotal.totalBulkBuyDiscount > 0) {
-                        $("#trbulk_buy_discount").show();
+                        $("#tr_discount").show();
                     }
-                    if (calculatedTotal.totalLocalBuyDiscount != null && calculatedTotal.totalLocalBuyDiscount > 0) {
-                        $("#trlocal_buy_discount").show();
-                    }
+
                 }
 
 
@@ -292,6 +292,7 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
 
             }
         });
+
 
 
     });
@@ -308,11 +309,11 @@ function getCartCount(addProductArray) {
         url: "http://localhost/EcommerceApi/api/v1/ecommerce_api/countCartItem",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data:  JSON.stringify(addProductArray), 
+        data: JSON.stringify(addProductArray),
         success: function (response) {
             debugger;
             $("#span_cart_count").text("");
-            if (response != null ) {
+            if (response != null) {
                 $("#span_cart_count").text(response);
             }
 
