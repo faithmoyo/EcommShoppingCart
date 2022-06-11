@@ -64,7 +64,7 @@ namespace Ecommerce.Api.Controllers
         {
 
             try
-            {
+            { 
                 return Request.CreateResponse(HttpStatusCode.OK, ecommerce.CalculateTotal(sessionShoppingCart));
             }
             catch (Exception ex)
