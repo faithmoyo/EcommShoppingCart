@@ -7,8 +7,12 @@ IIS
 SQL Server
 Database .bak 
 
-### Assumptions
+## Assumptions
 Location Services disabling
 Caching 
 Images loaded already at start and not read from a BLOB in real time
 Voucher Code not disabled after application
+
+## Tools
+Bootstrap, Ajax
+MSTest, MOQ
