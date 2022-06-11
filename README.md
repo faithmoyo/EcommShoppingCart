@@ -23,7 +23,7 @@ http://localhost/EcommerceApi/swagger/ui/index#/<br />
 
 ## Assumptions
 Location Services not enabled <br />
-Caching Services not enabled <br />
+Caching not enabled in Developer Mode <br />
 Images loaded already at start and not read from a BLOB in real time <br />
 Voucher Code not disabled or registered as used after they are applied <br />
 Checkout as Guest allowed, registration compulsory at checkout <br />
