@@ -58,7 +58,7 @@ namespace Ecommerce.Business
                     {
                         DiscountType discountType = _repo.GetDiscountType(discountVoucher);
 
-                        GetDiscountedTotals(discountType,total_amount,out discountApplied);
+                        totalVoucherDiscount=GetDiscountedTotals(discountType,total_amount,out discountApplied);
                     }
 
                     calculatedTotal = new CalculatedTotal

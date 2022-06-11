@@ -1,4 +1,6 @@
-﻿using Ecommerce.Entities.Models;
+﻿using Autofac.Extras.Moq;
+using Ecommerce.Entities.Models;
+using Ecommerce.Repository.DataSource;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -37,6 +39,38 @@ namespace Ecommerce.Business.UnitTests
             //Assert
             Assert.AreEqual(60, result.actualAmount);
         }
+
+        /*[TestMethod]
+        public void CalculateTotal_VoucherEntered_DiscountedAmountReturnedNetDiscount()
+        /*Method_Scenario_ExpectedBehaviour*/
+        /*{
+            //Arrange
+            using (var mock = AutoMock.GetLoose())
+            {
+                mock.Mock<DataSourceEcommerce>().Setup(x => x.Connection());
+
+                var ecommManager = mock.Create<EcommerceManager>();
+
+                //Act
+                var currentShoppingCart = new ShoppingCart
+                {
+                    productList = new List<Product>()
+                    {
+                        new Product(){PRODUCT_ID=2,PRODUCT_UNIT_PRICE=10}
+                    },
+                    salesOrderLines = new List<SalesOrderLine>()
+                    {
+                        new SalesOrderLine(){PRODUCT_ID=2,QUANTITY=1}
+                    },
+                    discountVoucher = "PEBCKISG66QD0WB"
+                };
+
+                var result = ecommManager.CalculateTotal(currentShoppingCart);
+
+                //Assert
+                Assert.AreEqual(9.50, result.actualAmount);
+            }
+        }*/
 
         [TestMethod]
         public void GetCartTotals_EmptyCart_ZeroTotalsReturned()

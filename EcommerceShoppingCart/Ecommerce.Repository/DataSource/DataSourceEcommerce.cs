@@ -6,7 +6,7 @@ namespace Ecommerce.Repository.DataSource
 {
     public class DataSourceEcommerce : IDisposable
     {
-        private string _ConnectionString;
+        public string _ConnectionString;
 
         /// <summary>
         /// Create a connection to the database

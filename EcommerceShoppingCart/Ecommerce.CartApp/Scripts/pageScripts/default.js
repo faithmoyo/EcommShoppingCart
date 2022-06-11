@@ -32,7 +32,7 @@
 
                         productArray.forEach((entry) => {
                             debugger;
-                            $("#tableCartDetails > tbody").append("<tr><td id='td_product_id' style='display:none'>" + entry.PRODUCT_ID + "</td><td id='td_cartdetail_desc' style='text-align:center'>" + entry.PRODUCT_DESCRIPTION + "</td><td style='text-align:center'> " + entry.PRODUCT_UNIT_PRICE + "</td><td style='text-align:center'><input type='number' id='txt_quantity'  value= 1 style='width: 100 %'></td><td><button  data-product_id_current=" + entry.PRODUCT_ID + " class='btn btn-danger' style='width: 100 %'>REMOVE</button></td></tr>");
+                            $("#tableCartDetails > tbody").append("<tr><td id='td_product_id' style='display:none'>" + entry.PRODUCT_ID + "</td><td id='td_cartdetail_desc' style='text-align:center'>" + entry.PRODUCT_DESCRIPTION + "</td><td style='text-align:center'> " + entry.PRODUCT_UNIT_PRICE + "</td><td style='text-align:center'><input type='number' id='txt_quantity' min=1 value=1 style='width: 100 %'></td><td><button  data-product_id_current=" + entry.PRODUCT_ID + " class='btn btn-danger' style='width: 100 %'>REMOVE</button></td></tr>");
                         });
                     }
 
@@ -131,6 +131,11 @@
         addProductArray = removeArrayElement(addProductArray, product_id_current)
         reloadTableData(product_id_array, addProductArray);
         getCartCount(addProductArray);
+        if (product_id_current != null) {
+            let product_main_button_id = document.getElementById(product_id_current.toString());
+            if (product_main_button_id != null)
+                product_main_button_id.disabled = false;
+        }
     });
 
     $('#normal_stock').on('click', 'button', function () {
@@ -184,8 +189,6 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
     let product_id_list = current_product_id_array.join(",");
     let productArray = [];
 
-
-
     $.when(
 
         $.ajax({
@@ -220,7 +223,7 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
                             }
                         });
                         debugger;
-                        $("#tableCartDetails > tbody").append("<tr><td id='td_product_id' style='display:none'>" + entry.PRODUCT_ID + "</td><td id='td_cartdetail_desc' style='text-align:center'>" + entry.PRODUCT_DESCRIPTION + "</td><td style='text-align:center'> " + entry.PRODUCT_UNIT_PRICE + "</td><td style='text-align:center'><input type='number' id='txt_quantity'  value= " + salesOrderLineQuantity + " style='width: 100 %'></td><td><button  data-product_id_current=" + entry.PRODUCT_ID + " class='btn btn-danger' style='width: 100 %'>REMOVE</button></td></tr>");
+                        $("#tableCartDetails > tbody").append("<tr><td id='td_product_id' style='display:none'>" + entry.PRODUCT_ID + "</td><td id='td_cartdetail_desc' style='text-align:center'>" + entry.PRODUCT_DESCRIPTION + "</td><td style='text-align:center'> " + entry.PRODUCT_UNIT_PRICE + "</td><td style='text-align:center'><input type='number' id='txt_quantity' min=1 value= " + salesOrderLineQuantity + " style='width: 100 %'></td><td><button  data-product_id_current=" + entry.PRODUCT_ID + " class='btn btn-danger' style='width: 100 %'>REMOVE</button></td></tr>");
                     });
                 }
 
@@ -248,7 +251,7 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
         });
         debugger;
 
-        let TestObject = {
+        let CurrentCart = {
             'productList': productArray,
             'salesOrderLines': salesOrderLines,
             'discountVoucher': $('#inputVoucher').val()
@@ -260,7 +263,7 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
             url: "http://localhost/EcommerceApi/api/v1/ecommerce_api/calculateTotal",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify(TestObject),
+            data: JSON.stringify(CurrentCart),
             success: function (response) {
                 debugger;
                 if (response != null && response != "") {
@@ -274,12 +277,13 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
                 if (calculatedTotal != null) {
 
 
-                    $("#tdDiscountAmount").text("$" + calculatedTotal.totalBulkBuyDiscount.toFixed(2));
-                    $("#tdTotalAmountvalue").text("$" + calculatedTotal.totalAmount.toFixed(2));
+                    $("#tdDiscountAmount").text("$" + calculatedTotal.totalVoucherDiscount.toFixed(2));
+                    $("#tdTotalAmountvalue").text("$" + calculatedTotal.subTotalAmount.toFixed(2));
 
                     $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount.toFixed(2));
-                    if (calculatedTotal.totalBulkBuyDiscount != null && calculatedTotal.totalBulkBuyDiscount > 0) {
+                    if (calculatedTotal.totalVoucherDiscount != null && calculatedTotal.totalVoucherDiscount > 0) {
                         $("#tr_discount").show();
+                        $("#inputVoucher").val('');
                     }
 
                 }

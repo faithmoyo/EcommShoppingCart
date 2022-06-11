@@ -13,14 +13,12 @@ namespace Ecommerce.Repository
 
         public IEnumerable<Product> GetProduct(string productId_list)
         {
-
             var parameters = new DynamicParameters();
             parameters.Add("@PRODUCT_ID", 0);
             parameters.Add("@PRODUCT_ID_LIST", productId_list);
 
             _DB = new DataSourceEcommerce();
-            var results = _DB.Connection().Query<Product>("STP_PRODUCT", parameters, commandType: CommandType.StoredProcedure).ToList();
-            return results;
+            return _DB.Connection().Query<Product>("STP_PRODUCT", parameters, commandType: CommandType.StoredProcedure).ToList();
         }
 
         public DiscountType GetDiscountType(string discountVoucher)
@@ -31,8 +29,7 @@ namespace Ecommerce.Repository
                 parameters.Add("@@DISCOUNT_TYPE_CODE", discountVoucher);
 
                 _DB = new DataSourceEcommerce();
-                var results = _DB.Connection().Query<DiscountType>("STP_GET_DISCOUNT_TYPE", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                return results;
+                return _DB.Connection().Query<DiscountType>("STP_GET_DISCOUNT_TYPE", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
             }
             return new DiscountType();
         }
