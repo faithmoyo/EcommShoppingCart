@@ -27,7 +27,7 @@ Bootstrap, Ajax <br />
 REST <br />
 Dapper <br />
 Stored Procedures <br />
-MSTest, MOQ <br />
+MSTest, MOQ, Autofac.Extras.Moq<br />
 Autofac.Extras.Moq <br />
 ASP.NET Sessions <br />
 
