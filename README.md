@@ -22,6 +22,7 @@ To explore the Ecommerce.API using swagger, set virtual path and navigate to:<br
 http://localhost/EcommerceApi/swagger/ui/index#/<br />
 
 ## Assumptions
+Shopping Cart states not saved to DB, cart manipulated at runtime <br />
 Location Services not enabled <br />
 Caching not enabled in Developer Mode <br />
 Stock for all products is available <br />
