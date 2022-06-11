@@ -24,6 +24,7 @@ http://localhost/EcommerceApi/swagger/ui/index#/<br />
 ## Assumptions
 Location Services not enabled <br />
 Caching not enabled in Developer Mode <br />
+Stock for all products is available <br />
 Images loaded already at start and not read from a BLOB in real time <br />
 Voucher Code not disabled or registered as used after they are applied <br />
 Checkout as Guest allowed, registration compulsory at checkout <br />
@@ -40,6 +41,8 @@ ASP.NET Sessions <br />
 
 ## Future Improvements
 Display Line Totals (Price x Quantity per line)<br />
+Maximum number entry for the quantity that can be ordered will be the available stock for that product
 Higher Test Coverage<br />
+
 
 
