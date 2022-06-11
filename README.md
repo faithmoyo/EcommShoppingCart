@@ -18,7 +18,7 @@ VZGEUT0TFI1JC6X <br />
 PEBCKISG66QD0WB <br />
 PLKIWZO8X60LB1R <br />
 SOK8I2S6IU3OZIM <br />
-To browse the Ecommerce.API using swagger, set virtual path and navigate to:<br />
+To explore the Ecommerce.API using swagger, set virtual path and navigate to:<br />
 http://localhost/EcommerceApi/swagger/ui/index#/<br />
 
 ## Assumptions
