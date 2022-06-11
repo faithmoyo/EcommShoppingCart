@@ -31,4 +31,7 @@ MSTest, MOQ, Autofac.Extras.Moq<br />
 Autofac.Extras.Moq <br />
 ASP.NET Sessions <br />
 
+## Future Improvements
+Higher Test Coverage<br />
+
 
