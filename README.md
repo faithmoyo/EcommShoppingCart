@@ -32,6 +32,7 @@ Autofac.Extras.Moq <br />
 ASP.NET Sessions <br />
 
 ## Future Improvements
+Display Line Totals (Price x Quantity per line)<br />
 Higher Test Coverage<br />
 
 
