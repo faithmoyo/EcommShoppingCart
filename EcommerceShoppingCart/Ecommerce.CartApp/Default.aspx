@@ -354,12 +354,10 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">CLEAR CART</button>
+                    <p id="voucherSuccess" style="color: red" hidden><strong>Voucher Applied!</strong></p>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonClearCart">CLEAR CART</button>
                     <button type="button" class="btn btn-primary" id="btnContinue">PROCEED TO CHECKOUT</button>
                 </div>
             </div>

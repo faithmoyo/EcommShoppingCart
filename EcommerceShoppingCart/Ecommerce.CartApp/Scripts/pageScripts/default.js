@@ -89,6 +89,7 @@
                         $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount.toFixed(2));
                         if (calculatedTotal.totalVoucherDiscount != null && calculatedTotal.totalVoucherDiscount > 0) {
                             $("#tr_discount").show();
+                            $("#inputVoucher").val('');
                         }
 
                     }
@@ -106,6 +107,21 @@
         });
 
 
+    });
+
+    $("#buttonClearCart").on('click', function () {
+        debugger;
+        let cart_id_current = document.getElementById('tableCartDetails');
+        product_id_array = RemoveTableElement(product_id_array, cart_id_current);
+        addProductArray = removeArrayElement(addProductArray, cart_id_current)
+        reloadTableData(product_id_array, addProductArray);
+        getCartCount(addProductArray);
+        if (cart_id_current != null) {
+            let product_main_button_id = document.getElementById(cart_id_current.toString());
+            if (product_main_button_id != null)
+                product_main_button_id.disabled = false;
+        }
+       
     });
 
     $('#discounted_stock').on('click', 'button', function () {
