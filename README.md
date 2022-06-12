@@ -45,6 +45,7 @@ Display Line Totals (Price x Quantity per line)<br />
 More UI feedback to enhance UX (toasts or text confirming action)<br />
 Maximum number entry for the quantity that can be ordered will be the available stock for that product<br />
 Higher Test Coverage<br />
+Voucher application can be revoked<br />
 
 
 
