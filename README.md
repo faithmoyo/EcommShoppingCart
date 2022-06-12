@@ -9,6 +9,7 @@ ECOMMERCE.bak <br />
 
 ## Test Data
 Create local SQL DB named 'ECOMMERCE' and use .bak file to Restore the DB from the provided backup file <br />
+Drop .bak file under the C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\Backup and Restore to DB<br />
 If not already set; add IIS APPPOOL\DefaultAppPool as a DB User to the ECOMMERCE DB <br />
 Open solution in at least Visual Studio 2019, ADMIN mode <br />
 Create Local IIS Virtual Directories for the API and CartApp under Properties/Web <br />
