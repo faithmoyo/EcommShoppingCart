@@ -345,6 +345,11 @@
                                                     <th colspan="2" style='text-align: right'>
                                                         <button type="button" name="add" id="viewDicountVoucher" class="btn btn-success btn-xs">APPLY VOUCHER</button></th>
                                                 </tr>
+                                                <tr id="tableRowVoucherMessage" style="display:none">
+                                                    <th colspan="4">
+                                                        <p id="voucherSuccess" style="color: red"><strong>Voucher Applied!</strong></p>
+                                                    </th>
+                                                </tr>
 
                                             </tfoot>
 
@@ -356,8 +361,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <p id="voucherSuccess" style="color: red" hidden><strong>Voucher Applied!</strong></p>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="buttonClearCart">CLEAR CART</button>
+                    
+                    <button type="button" class="btn btn-secondary" id="buttonClearCart">CLEAR CART</button>
                     <button type="button" class="btn btn-primary" id="btnContinue">PROCEED TO CHECKOUT</button>
                 </div>
             </div>

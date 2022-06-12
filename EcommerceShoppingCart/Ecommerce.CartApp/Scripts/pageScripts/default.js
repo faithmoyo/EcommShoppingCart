@@ -23,7 +23,7 @@
 
                         if (typeof response === 'object')
                             productArray = response;
-                        else if (typeof userData === 'string')
+                        else if (typeof response === 'string')
                             productArray = JSON.parse(response);
 
                     }
@@ -77,7 +77,7 @@
                         debugger;
                         if (typeof response === 'object')
                             calculatedTotal = response;
-                        else if (typeof userData === 'string')
+                        else if (typeof response === 'string')
                             calculatedTotal = JSON.parse(response);
                         debugger;
                     }
@@ -111,18 +111,19 @@
 
     $("#buttonClearCart").on('click', function () {
         debugger;
-        let cart_id_current = document.getElementById('tableCartDetails');
-        product_id_array = RemoveTableElement(product_id_array, cart_id_current);
-        addProductArray = removeArrayElement(addProductArray, cart_id_current)
+
+        product_id_array = [];
+        addProductArray = [];
         reloadTableData(product_id_array, addProductArray);
         getCartCount(addProductArray);
-        if (cart_id_current != null) {
-            let product_main_button_id = document.getElementById(cart_id_current.toString());
-            if (product_main_button_id != null)
-                product_main_button_id.disabled = false;
-        }
-       
+
+        $("#normalProductContainer :button").prop("disabled", false);
+        $("#discounted_stock :button").prop("disabled", false);
+        $('#inputVoucher').val('');
+        $('#tableRowVoucherMessage').show();
+        $("#tr_discount").hide();
     });
+
 
     $('#discounted_stock').on('click', 'button', function () {
         debugger;
@@ -220,7 +221,7 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
 
                     if (typeof response === 'object')
                         productArray = response// dont parse if object 
-                    else if (typeof userData === 'string')
+                    else if (typeof response === 'string')
                         productArray = JSON.parse(response);
 
                 }
@@ -286,7 +287,7 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
                     debugger;
                     if (typeof response === 'object')
                         calculatedTotal = response;
-                    else if (typeof userData === 'string')
+                    else if (typeof response === 'string')
                         calculatedTotal = JSON.parse(response);
                     debugger;
                 }
@@ -295,8 +296,15 @@ function reloadTableData(current_product_id_array, currentAddedProductArray) {
 
                     $("#tdDiscountAmount").text("$" + calculatedTotal.totalVoucherDiscount.toFixed(2));
                     $("#tdTotalAmountvalue").text("$" + calculatedTotal.subTotalAmount.toFixed(2));
-
                     $("#tdTotalAfterDiscountvalue").text("$" + calculatedTotal.actualAmount.toFixed(2));
+
+                    if (calculatedTotal.discountMessage != null) {
+                        $("#voucherSuccess").html("<strong>" + calculatedTotal.discountMessage + "</strong>");
+                        $('#tableRowVoucherMessage').show();
+                    } else {
+                        $('#tableRowVoucherMessage').hide();
+                    }
+
                     if (calculatedTotal.totalVoucherDiscount != null && calculatedTotal.totalVoucherDiscount > 0) {
                         $("#tr_discount").show();
                         $("#inputVoucher").val('');

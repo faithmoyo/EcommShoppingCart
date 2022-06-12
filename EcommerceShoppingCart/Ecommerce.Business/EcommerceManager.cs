@@ -47,26 +47,26 @@ namespace Ecommerce.Business
 
                 if (productList.Count > 0 && salesOrderLines.Count > 0)
                 {
-                    decimal total_amount, totalVoucherDiscount=NILVALUE;
+                    decimal total_amount, totalVoucherDiscount = NILVALUE;
                     var discountApplied = string.Empty;
 
                     var isVoucherExist = Regex.Replace(discountVoucher, @"\s+", "") != string.Empty;
 
-                   total_amount = GetCartTotals(salesOrderLines, productList);
+                    total_amount = GetCartTotals(salesOrderLines, productList);
 
                     if (isVoucherExist)
                     {
                         DiscountType discountType = _repo.GetDiscountType(discountVoucher);
 
-                        totalVoucherDiscount=GetDiscountedTotals(discountType,total_amount,out discountApplied);
+                        totalVoucherDiscount = GetDiscountedTotals(discountType, total_amount, out discountApplied);
                     }
-
                     calculatedTotal = new CalculatedTotal
                     {
                         subTotalAmount = total_amount,
-                        totalVoucherDiscount = decimal.Round(totalVoucherDiscount,2,MidpointRounding.AwayFromZero),
+                        totalVoucherDiscount = decimal.Round(totalVoucherDiscount, 2, MidpointRounding.AwayFromZero),
                         discountType = discountApplied,
-                        actualAmount = decimal.Round(total_amount - totalVoucherDiscount, 2, MidpointRounding.AwayFromZero)
+                        actualAmount = decimal.Round(total_amount - totalVoucherDiscount, 2, MidpointRounding.AwayFromZero),
+                        discountMessage = (isVoucherExist && totalVoucherDiscount > 1) ? "Voucher Applied!" : "Voucher Invalid!"
                     };
                     return calculatedTotal;
 
@@ -85,7 +85,7 @@ namespace Ecommerce.Business
         public decimal GetCartTotals(List<SalesOrderLine> orderLines, List<Product> productList)
         {
             decimal subTotalAmount = NILVALUE;
-            
+
             foreach (var salesOrderLine in orderLines)
             {
                 var current_product = productList.FirstOrDefault(x => x.PRODUCT_ID == salesOrderLine.PRODUCT_ID);
