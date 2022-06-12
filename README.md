@@ -42,7 +42,8 @@ ASP.NET Sessions <br />
 
 ## Future Improvements
 Display Line Totals (Price x Quantity per line)<br />
-Maximum number entry for the quantity that can be ordered will be the available stock for that product
+More UI feedback to enhance UX (toasts or text confirming action)<br />
+Maximum number entry for the quantity that can be ordered will be the available stock for that product<br />
 Higher Test Coverage<br />
 
 
